@@ -88,6 +88,7 @@ import io.github.landwarderer.futon.search.ui.multi.SearchActivity
 import io.github.landwarderer.futon.settings.SettingsActivity
 import io.github.landwarderer.futon.settings.override.OverrideConfigActivity
 import io.github.landwarderer.futon.settings.reader.ReaderTapGridConfigActivity
+import io.github.landwarderer.futon.settings.sources.TagsBlacklistActivity
 import io.github.landwarderer.futon.settings.sources.auth.SourceAuthActivity
 import io.github.landwarderer.futon.settings.sources.catalog.SourcesCatalogActivity
 import io.github.landwarderer.futon.settings.sources.extension.ExtensionDownloaderActivity
@@ -210,6 +211,10 @@ class AppRouter private constructor(
 
     fun openDownloads() = startActivity(DownloadsActivity::class.java)
 
+    fun openDownloadQueue() {
+        startActivity(Intent(contextOrNull() ?: return, Class.forName("io.github.landwarderer.futon.download.ui.DownloadQueueActivity")))
+    }
+
     fun openDirectoriesSettings() = startActivity(MangaDirectoriesActivity::class.java)
 
     fun openBrowser(url: String, source: MangaSource?, title: String?) {
@@ -310,6 +315,8 @@ class AppRouter private constructor(
             manageSourcesIntent(contextOrNull() ?: return),
         )
     }
+
+    fun openTagsBlacklist() = startActivity(TagsBlacklistActivity::class.java)
 
     fun openStatistic() = startActivity(StatsActivity::class.java)
 
