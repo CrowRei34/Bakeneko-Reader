@@ -38,7 +38,6 @@ class Migration29To30 : Migration(29, 30) {
             )
             """.trimIndent()
         )
-        db.execSQL("CREATE INDEX IF NOT EXISTS `index_smart_downloads_manga_id` ON `$TABLE_SMART_DOWNLOADS` (`manga_id`)")
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_tags_title` ON `$TABLE_TAGS` (`title`)")
     }
 }
