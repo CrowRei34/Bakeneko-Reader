@@ -4,6 +4,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import io.github.landwarderer.futon.core.db.TABLE_DOWNLOAD_QUEUE
 import io.github.landwarderer.futon.core.db.TABLE_SMART_DOWNLOADS
+import io.github.landwarderer.futon.core.db.TABLE_TAGS
 
 class Migration29To30 : Migration(29, 30) {
     override fun migrate(db: SupportSQLiteDatabase) {
@@ -38,5 +39,6 @@ class Migration29To30 : Migration(29, 30) {
             """.trimIndent()
         )
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_smart_downloads_manga_id` ON `$TABLE_SMART_DOWNLOADS` (`manga_id`)")
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_tags_title` ON `$TABLE_TAGS` (`title`)")
     }
 }
