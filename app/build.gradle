@@ -29,8 +29,8 @@ android {
 		applicationId 'io.github.landwarderer.futon'
 		minSdk = 23
 		targetSdk = 36
-		versionCode project.hasProperty('versionCode') ? project.property('versionCode').toInteger() : 90701
-        versionName project.hasProperty('versionName') ? project.property('versionName') : '9.7.1'
+		versionCode project.hasProperty('versionCode') ? project.property('versionCode').toInteger() : 90800
+        versionName project.hasProperty('versionName') ? project.property('versionName') : '9.8'
         generatedDensities = []
 		testInstrumentationRunner 'io.github.landwarderer.futon.HiltTestRunner'
 		ksp {
@@ -202,6 +202,7 @@ dependencies {
 	implementation libs.okhttp.dnsoverhttps
 	implementation libs.okio
 	implementation libs.kotlinx.serialization.json
+	implementation libs.kotlinx.serialization.json.okio
 
 	implementation libs.adapterdelegates
 	implementation libs.adapterdelegates.viewbinding
