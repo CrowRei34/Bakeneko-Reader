@@ -1,0 +1,81 @@
+CREATE TABLE manga (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    url TEXT NOT NULL UNIQUE,
+    title TEXT NOT NULL,
+    source TEXT NOT NULL,
+    coverUrl TEXT,
+    description TEXT
+);
+
+CREATE TABLE chapter (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    mangaId INTEGER NOT NULL,
+    url TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    number REAL NOT NULL,
+    date INTEGER,
+    FOREIGN KEY(mangaId) REFERENCES manga(id) ON DELETE CASCADE
+);
+
+CREATE TABLE favorite (
+    mangaId INTEGER NOT NULL PRIMARY KEY,
+    createdAt INTEGER NOT NULL,
+    FOREIGN KEY(mangaId) REFERENCES manga(id) ON DELETE CASCADE
+);
+
+-- Queries for Manga
+insertManga:
+INSERT OR REPLACE INTO manga(url, title, source, coverUrl, description)
+VALUES (?, ?, ?, ?, ?);
+
+getMangaByUrl:
+SELECT * FROM manga WHERE url = ? AND source = ?;
+
+getMangaById:
+SELECT * FROM manga WHERE id = ?;
+
+-- Queries for Chapter
+insertChapter:
+INSERT OR REPLACE INTO chapter(mangaId, url, name, number, date)
+VALUES (?, ?, ?, ?, ?);
+
+getChaptersForManga:
+SELECT * FROM chapter WHERE mangaId = ? ORDER BY number DESC;
+
+-- Queries for Favorite
+addFavorite:
+INSERT OR IGNORE INTO favorite(mangaId, createdAt)
+VALUES (?, ?);
+
+removeFavorite:
+DELETE FROM favorite WHERE mangaId = ?;
+
+isFavorite:
+SELECT count(*) FROM favorite WHERE mangaId = ?;
+
+getFavorites:
+SELECT manga.* FROM manga
+INNER JOIN favorite ON manga.id = favorite.mangaId
+ORDER BY favorite.createdAt DESC;
+
+-- Queries for History
+CREATE TABLE history (
+    mangaId INTEGER NOT NULL PRIMARY KEY,
+    chapterIndex INTEGER NOT NULL,
+    pageIndex INTEGER NOT NULL,
+    updatedAt INTEGER NOT NULL,
+    FOREIGN KEY(mangaId) REFERENCES manga(id) ON DELETE CASCADE
+);
+
+upsertHistory:
+INSERT OR REPLACE INTO history(mangaId, chapterIndex, pageIndex, updatedAt)
+VALUES (?, ?, ?, ?);
+
+getHistoryByMangaId:
+SELECT * FROM history WHERE mangaId = ?;
+
+getHistoryList:
+SELECT manga.*, history.chapterIndex, history.pageIndex, history.updatedAt
+FROM manga
+INNER JOIN history ON manga.id = history.mangaId
+ORDER BY history.updatedAt DESC;

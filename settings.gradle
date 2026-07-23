@@ -29,4 +29,5 @@ dependencyResolutionManagement {
 }
 
 include ':app'
+include ':desktop'
 rootProject.name = "Futon"
