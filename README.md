@@ -1,6 +1,6 @@
-# Trinity-Reader
+# Bakeneko-Reader
 
-Trinity-Reader is a premium, open-source manga reader for Desktop and Android.
+Bakeneko-Reader is a premium, open-source manga reader for Desktop and Android.
 
 ## Features
 - Offline reading and downloads
