@@ -13,11 +13,11 @@ import org.koitharu.kotatsu.parsers.model.MangaListFilter
 
 class MangaRepository(private val context: MangaLoaderContext) {
     
-    suspend fun fetchCatalog(source: MangaParserSource, page: Int = 1, query: String = ""): List<Manga> = withContext(Dispatchers.IO) {
+    suspend fun fetchCatalog(source: MangaParserSource, offset: Int = 0, query: String = ""): List<Manga> = withContext(Dispatchers.IO) {
         val parser = context.newParserInstance(source)
         val order = parser.availableSortOrders.firstOrNull() ?: SortOrder.UPDATED
         val filter = if (query.isNotBlank()) MangaListFilter(query = query) else MangaListFilter.EMPTY
-        return@withContext parser.getList(0, order, filter)
+        return@withContext parser.getList(offset, order, filter)
     }
     
     suspend fun getMangaDetails(source: MangaParserSource, manga: Manga): Manga = withContext(Dispatchers.IO) {
@@ -42,10 +42,8 @@ class MangaRepository(private val context: MangaLoaderContext) {
     }
     
     // DB Methods
-    suspend fun toggleFavorite(manga: Manga, source: MangaParserSource, isFavorite: Boolean) = withContext(Dispatchers.IO) {
+    suspend fun saveMangaToDb(manga: Manga, source: MangaParserSource): Long = withContext(Dispatchers.IO) {
         val db = DatabaseManager.database.databaseQueries
-        
-        // Find or insert manga
         var dbManga = db.getMangaByUrl(manga.url, source.name).executeAsOneOrNull()
         if (dbManga == null) {
             db.insertManga(
@@ -57,11 +55,42 @@ class MangaRepository(private val context: MangaLoaderContext) {
             )
             dbManga = db.getMangaByUrl(manga.url, source.name).executeAsOne()
         }
+        return@withContext dbManga.id
+    }
+    
+    suspend fun getAllMangas(): List<Manga> = withContext(Dispatchers.IO) {
+        val db = DatabaseManager.database.databaseQueries
+        val allMangas = db.getAllMangas().executeAsList()
+        return@withContext allMangas.map { dbManga ->
+            val sourceEnum = MangaParserSource.values().find { it.name == dbManga.source } ?: MangaParserSource.MANGADEX
+            Manga(
+                id = 0L,
+                title = dbManga.title,
+                altTitle = null,
+                url = dbManga.url,
+                publicUrl = dbManga.url,
+                rating = 0f,
+                isNsfw = false,
+                coverUrl = dbManga.coverUrl,
+                tags = emptySet(),
+                state = null,
+                author = null,
+                description = dbManga.description,
+                source = sourceEnum
+            )
+        }
+    }
+    
+    suspend fun toggleFavorite(manga: Manga, source: MangaParserSource, isFavorite: Boolean) = withContext(Dispatchers.IO) {
+        val db = DatabaseManager.database.databaseQueries
+        
+        // Find or insert manga
+        val dbMangaId = saveMangaToDb(manga, source)
         
         if (isFavorite) {
-            db.addFavorite(dbManga.id, System.currentTimeMillis())
+            db.addFavorite(dbMangaId, System.currentTimeMillis())
         } else {
-            db.removeFavorite(dbManga.id)
+            db.removeFavorite(dbMangaId)
         }
     }
     

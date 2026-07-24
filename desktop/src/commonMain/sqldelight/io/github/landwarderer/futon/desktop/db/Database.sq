@@ -34,6 +34,9 @@ SELECT * FROM manga WHERE url = ? AND source = ?;
 getMangaById:
 SELECT * FROM manga WHERE id = ?;
 
+getAllMangas:
+SELECT * FROM manga;
+
 -- Queries for Chapter
 insertChapter:
 INSERT OR REPLACE INTO chapter(mangaId, url, name, number, date)

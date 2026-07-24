@@ -17,14 +17,6 @@ object DatabaseManager {
         // Check if we need to create the schema (basic check)
         if (!dbFile.exists() || dbFile.length() == 0L) {
             FutonDatabase.Schema.create(driver)
-        } else {
-            // Wait, SQLDelight needs us to create schema if tables don't exist.
-            // Using a simple try-catch for demo purposes
-            try {
-                FutonDatabase.Schema.create(driver)
-            } catch (e: Exception) {
-                // Ignore if tables already exist
-            }
         }
         
         database = FutonDatabase(driver)

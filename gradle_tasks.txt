@@ -1,0 +1,143 @@
+Reusing configuration cache.
+
+> Task :desktop:tasks
+
+------------------------------------------------------------
+Tasks runnable from project ':desktop'
+------------------------------------------------------------
+
+Build tasks
+-----------
+allMetadataJar - Assembles a jar archive containing the metadata for all Kotlin source sets.
+assemble - Assembles the outputs of this project.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildKotlinToolingMetadata - Build metadata json file containing information about the used Kotlin tooling
+buildNeeded - Assembles and tests this project and all projects it depends on.
+clean - Deletes the build directory.
+cleanAllTests - Deletes all the test results.
+desktopJar - Assembles an archive containing the main classes.
+desktopMainClasses - Assembles outputs for compilation 'main' of target 'desktop'
+desktopSourcesJar - Assembles a jar archive containing the sources of target 'desktop'.
+desktopTestClasses - Assembles outputs for compilation 'test' of target 'desktop'
+metadataMainClasses - Assembles outputs for compilation 'main' of target 'metadata'
+metadataSourcesJar - Assembles a jar archive containing the sources of target 'metadata'.
+sourcesJar - Assembles a jar archive containing the sources of target 'kotlin'.
+
+Compose desktop tasks
+---------------------
+checkRuntime
+createDistributable
+createReleaseDistributable
+createRuntimeImage
+flattenJars
+flattenReleaseJars
+notarizeDmg
+notarizeReleaseDmg
+package
+packageDeb
+packageDistributionForCurrentOS
+packageDmg
+packageMsi
+packageReleaseDeb
+packageReleaseDistributionForCurrentOS
+packageReleaseDmg
+packageReleaseMsi
+packageReleaseUberJarForCurrentOS
+packageUberJarForCurrentOS
+prepareAppResources
+proguardReleaseJars
+run
+runDistributable
+runRelease
+runReleaseDistributable
+suggestRuntimeModules
+unpackDefaultComposeDesktopJvmApplicationResources
+
+Help tasks
+----------
+artifactTransforms - Displays the Artifact Transforms that can be executed in project ':desktop'.
+buildEnvironment - Displays all buildscript dependencies declared in project ':desktop'.
+dependencies - Displays all dependencies declared in project ':desktop'.
+dependencyInsight - Displays the insight into a specific dependency in project ':desktop'.
+help - Displays a help message.
+javaToolchains - Displays the detected java toolchains.
+kotlinDslAccessorsReport - Prints the Kotlin code for accessing the currently available project extensions.
+outgoingVariants - Displays the outgoing variants of project ':desktop'.
+projects - Displays the sub-projects of project ':desktop'.
+properties - Displays the properties of project ':desktop'.
+resolvableConfigurations - Displays the configurations that can be resolved in project ':desktop'.
+tasks - Displays the tasks runnable from project ':desktop'.
+
+Ide tasks
+---------
+resolveIdeDependencies - Debugging/Diagnosing task that will resolve dependencies for the IDE
+
+Run tasks
+---------
+desktopRun - Jvm Run task for target 'desktop' and compilation 'main'. This task can act as carrier for the IDE to execute jvm based code
+
+Sqldelight tasks
+----------------
+generateCommonMainFutonDatabaseInterface - Generate commonMain Kotlin interface for FutonDatabase
+generateSqlDelightInterface - Aggregation task which runs every interface generation task for every given source
+verifyCommonMainFutonDatabaseMigration - Verify commonMain FutonDatabase migrations and CREATE statements match.
+verifySqlDelightMigration - Aggregation task which runs every migration task for every given source
+
+Verification tasks
+------------------
+allTests - Runs the tests for all targets and create aggregated report
+check - Runs all checks.
+checkKotlinGradlePluginConfigurationErrors - Checks that Kotlin Gradle Plugin hasn't reported project configuration errors, failing otherwise. This task always runs before compileKotlin* or similar tasks.
+desktopTest - Runs the tests of the test test run.
+
+Other tasks
+-----------
+checkLegacyAbi
+compileDesktopMainJava - Compiles desktop main Java source.
+compileDesktopTestJava - Compiles desktop test Java source.
+compileKotlinDesktop - Compiles the compilation 'main' in target 'desktop'.
+compileKotlinMetadata - Compiles the kotlin sources in compilation 'main' in target 'metadata' to Metadata.
+compileTestKotlinDesktop - Compiles the compilation 'test' in target 'desktop'.
+configureDesktopPreviewDesktop
+convertXmlValueResourcesForCommonMain
+convertXmlValueResourcesForCommonTest
+convertXmlValueResourcesForDesktopMain
+convertXmlValueResourcesForDesktopTest
+copyNonXmlValueResourcesForCommonMain
+copyNonXmlValueResourcesForCommonTest
+copyNonXmlValueResourcesForDesktopMain
+copyNonXmlValueResourcesForDesktopTest
+desktopCopyHierarchicalMultiplatformResources
+desktopProcessResources - Processes file collection.
+desktopTestProcessResources - Processes file collection.
+dumpLegacyAbi
+exportCommonSourceSetsMetadataLocationsForMetadataApiElements
+exportRootPublicationCoordinatesForMetadataApiElements
+exportTargetPublicationCoordinatesForDesktopApiElements
+exportTargetPublicationCoordinatesForDesktopRuntimeElements
+generateComposeResClass
+generateProjectStructureMetadata - Generates serialized project structure metadata of the current project (for tooling)
+generateResourceAccessorsForCommonMain
+generateResourceAccessorsForCommonTest
+generateResourceAccessorsForDesktopMain
+generateResourceAccessorsForDesktopTest
+metadataProcessResources - Processes file collection.
+prepareComposeResourcesTaskForCommonMain
+prepareComposeResourcesTaskForCommonTest
+prepareComposeResourcesTaskForDesktopMain
+prepareComposeResourcesTaskForDesktopTest
+prepareKotlinIdeaImport - Umbrella for all tasks required to run before IDEA/Gradle import
+processDesktopMainResources - Processes desktop main resources.
+processDesktopTestResources - Processes desktop test resources.
+setupLldbScript - Generate lldbinit file with imported konan_lldb.py script
+updateLegacyAbi
+
+Rules
+-----
+Pattern: clean<TaskName>: Cleans the output files of a task.
+Pattern: build<ConfigurationName>: Assembles the artifacts of a configuration.
+
+BUILD SUCCESSFUL in 3s
+1 actionable task: 1 executed
+Configuration cache entry reused.

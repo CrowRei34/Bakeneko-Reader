@@ -77,6 +77,38 @@ public class DatabaseQueries(
     )
   }
 
+  public fun <T : Any> getAllMangas(mapper: (
+    id: Long,
+    url: String,
+    title: String,
+    source: String,
+    coverUrl: String?,
+    description: String?,
+  ) -> T): Query<T> = Query(-1_899_998_167, arrayOf("manga"), driver, "Database.sq", "getAllMangas",
+      "SELECT manga.id, manga.url, manga.title, manga.source, manga.coverUrl, manga.description FROM manga") {
+      cursor ->
+    mapper(
+      cursor.getLong(0)!!,
+      cursor.getString(1)!!,
+      cursor.getString(2)!!,
+      cursor.getString(3)!!,
+      cursor.getString(4),
+      cursor.getString(5)
+    )
+  }
+
+  public fun getAllMangas(): Query<Manga> = getAllMangas { id, url, title, source, coverUrl,
+      description ->
+    Manga(
+      id,
+      url,
+      title,
+      source,
+      coverUrl,
+      description
+    )
+  }
+
   public fun <T : Any> getChaptersForManga(mangaId: Long, mapper: (
     id: Long,
     mangaId: Long,
